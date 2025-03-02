@@ -13,6 +13,7 @@ class Product:
         if self.name and self.price and self.quantity:
             self.active = True
 
+
     def get_quantity(self):
         return self.quantity
 
@@ -35,7 +36,7 @@ class Product:
 
     def show(self):
         if self.active:
-            print(f"{self.name}, Price: {self.price}, Quantity: {self.quantity}")
+            return f"{self.name}, Price: {self.price}, Quantity: {self.quantity}"
 
 
     def buy(self, quantity):
@@ -45,4 +46,4 @@ class Product:
             self.quantity -= quantity
             if self.quantity == 0:
                 self.deactivate()
-            return f"Total price: {self.price * quantity}"
+            return self.price * quantity
