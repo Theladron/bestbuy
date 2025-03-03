@@ -1,14 +1,20 @@
 import store
 import products
+import user_input
+
 
 def show_current_stock(shop):
+    print()
     print(shop.get_total_quantity())
+    print("----------")
 
 
 def show_products(shop):
+    print("----------")
     product_list = shop.get_all_products()
     for index in range(len(product_list)):
         print(f"{index+1}. {product_list[index].show()}")
+    print("----------")
 
 
 def make_order(shop):
@@ -17,13 +23,15 @@ def make_order(shop):
     print("When you want to finish order, enter empty text.")
     order_list = []
     while True:
-        item = int(input("Which product # do you want? "))
-        quantity = int(input("What amount do you want? "))
+        item = user_input.order_item_input(product_list)
+        quantity = user_input.order_quantity_input()
         if isinstance(item and quantity, int):
             order_list.append((product_list[item-1], quantity))
-            print(shop.order(order_list))
         else:
             break
+    if order_list:
+        print(shop.order(order_list))
+
 
 
 def start(shop):
@@ -33,15 +41,18 @@ def start(shop):
                   }
     while True:
 
-        print("""1. List all products in store
-    2. Show total amount in store
-    3. Make an order
-    4. Quit""")
-        user_input = int(input("Enter a number: "))
-        if user_input == 4:
+        print("""
+    Store Menu
+    ----------
+1. List all products in store
+2. Show total amount in store
+3. Make an order
+4. Quit""")
+        menu_choice = user_input.main_menu_input()
+        if menu_choice == 4:
             exit()
         else:
-            menu_funct[user_input](shop)
+            menu_funct[menu_choice](shop)
 
 
 def main():
