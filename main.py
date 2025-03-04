@@ -49,7 +49,7 @@ def make_order(shop):
 def start(shop):
     """
     Shows the menu functions, gets user input and calls the functions
-    interacting with the shop
+    interacting with the shop, ends the program if shop is empty
     :param shop: Store class, loaded with products from Product class
     """
     menu_funct = {1: show_products,
@@ -65,6 +65,10 @@ def start(shop):
 2. Show total amount in store
 3. Make an order
 4. Quit""")
+        if not shop.get_all_products():
+            print("\nThe shop does not have any products left. Thank you for"
+                  "your purchase and have a nice day!")
+            exit()
         menu_choice = user_input.main_menu_input()
         if menu_choice == 4:
             exit()
