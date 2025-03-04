@@ -3,14 +3,16 @@ class Product:
     def __init__(self, name, price, quantity):
         if not name:
             raise NameError("Name cannot be empty")
-        else:
-            self.name = name
-        if price < 0 or quantity < 0:
+        elif not isinstance(price, (float, int)):
+            raise TypeError(f"Price has to be a number: {price}")
+        elif not isinstance(quantity, int):
+            raise TypeError(f"Quantity has to be a whole number: {quantity}")
+        elif price < 0 or quantity < 0:
             raise ValueError("Price/Quantity cannot be negative")
         else:
+            self.name = name
             self.price = float(price)
             self.quantity = quantity
-        if self.name and self.price and self.quantity:
             self.active = True
 
 
@@ -19,7 +21,9 @@ class Product:
 
 
     def set_quantity(self, quantity):
-        self.quantity += quantity
+        self.quantity = quantity
+        if self.quantity == 0:
+            self.deactivate()
 
 
     def is_active(self):
@@ -40,10 +44,10 @@ class Product:
 
 
     def buy(self, quantity):
-        if (self.quantity - quantity) < 0:
-            raise ValueError("Cannot buy a higher quantity then the quantity of the item")
+        if not self.is_active():
+            raise ValueError("Product Inactive")
+        if (self.get_quantity() - quantity) < 0:
+            raise ValueError("Quantity larger then what exists")
         else:
-            self.quantity -= quantity
-            if self.quantity == 0:
-                self.deactivate()
+            self.set_quantity((self.get_quantity() - quantity))
             return self.price * quantity

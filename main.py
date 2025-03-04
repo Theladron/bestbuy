@@ -56,13 +56,21 @@ def start(shop):
 
 
 def main():
-
-    product_list = [ products.Product("MacBook Air M2", price=1450, quantity=100),
-                 products.Product("Bose QuietComfort Earbuds", price=250, quantity=500),
-                 products.Product("Google Pixel 7", price=500, quantity=250)
-                    ]
-    best_buy = store.Store(product_list)
-    start(best_buy)
+    """Created a list of product objects and starts the menu interface"""
+    try:
+        product_list = [ products.Product("MacBook Air M2", price=1450, quantity=100),
+                    products.Product("Bose QuietComfort Earbuds", price=250, quantity=500),
+                    products.Product("Google Pixel 7", price=500, quantity=250)
+                        ]
+        best_buy = store.Store(product_list)
+    except ValueError as e:
+        print(f"Error with the input values: {e}")
+    except TypeError as e:
+        print(f"Error with the input type: {e}")
+    except NameError as e:
+        print(f"Error catching name: {e}")
+    else:
+        start(best_buy)
 
 
 if __name__ == "__main__":
