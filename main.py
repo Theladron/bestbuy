@@ -4,12 +4,20 @@ import user_input
 
 
 def show_current_stock(shop):
+    """
+    Gets total quantity of all products in the shop
+    :param shop: Store class, loaded with products from Product class
+    """
     print()
     print(shop.get_total_quantity())
     print("----------")
 
 
 def show_products(shop):
+    """
+    Gets all products currently in the shop
+    :param shop: Store class, loaded with products from Product class
+    """
     print("----------")
     product_list = shop.get_all_products()
     for index in range(len(product_list)):
@@ -18,6 +26,11 @@ def show_products(shop):
 
 
 def make_order(shop):
+    """
+    Creates a list of tuples with product and quantity from repeated user inputs,
+    calls the order from the list
+    :param shop: Store class, loaded with products from Product class
+    """
     show_products(shop)
     product_list = shop.get_all_products()
     print("When you want to finish order, enter empty text.")
@@ -33,8 +46,12 @@ def make_order(shop):
         print(shop.order(order_list))
 
 
-
 def start(shop):
+    """
+    Shows the menu functions, gets user input and calls the functions
+    interacting with the shop
+    :param shop: Store class, loaded with products from Product class
+    """
     menu_funct = {1: show_products,
                   2: show_current_stock,
                   3: make_order,
@@ -56,7 +73,7 @@ def start(shop):
 
 
 def main():
-    """Created a list of product objects and starts the menu interface"""
+    """Created a list of product objects and starts the menu interface, handles exceptions"""
     try:
         product_list = [ products.Product("MacBook Air M2", price=1450, quantity=100),
                     products.Product("Bose QuietComfort Earbuds", price=250, quantity=500),
