@@ -2,7 +2,6 @@ import store
 import products
 import user_input
 
-
 def show_current_stock(shop):
     """
     Gets total quantity of all products in the shop
@@ -20,8 +19,8 @@ def show_products(shop):
     """
     print("----------")
     product_list = shop.get_all_products()
-    for index in range(len(product_list)):
-        print(f"{index+1}. {product_list[index].show()}")
+    for index, product in enumerate(product_list):
+        print(f"{index+1}. {product.show()}")
     print("----------")
 
 
@@ -84,12 +83,12 @@ def main():
                     products.Product("Google Pixel 7", price=500, quantity=250)
                         ]
         best_buy = store.Store(product_list)
-    except ValueError as e:
-        print(f"Error with the input values: {e}")
-    except TypeError as e:
-        print(f"Error with the input type: {e}")
-    except NameError as e:
-        print(f"Error catching name: {e}")
+    except ValueError as error:
+        print(f"Error with the input values: {error}")
+    except TypeError as error:
+        print(f"Error with the input type: {error}")
+    except NameError as error:
+        print(f"Error catching name: {error}")
     else:
         start(best_buy)
 

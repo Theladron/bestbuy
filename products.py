@@ -24,17 +24,16 @@ class Product:
         """
         if not name:
             raise NameError("Name cannot be empty")
-        elif not isinstance(price, (float, int)):
+        if not isinstance(price, (float, int)):
             raise TypeError(f"Price has to be a number: {price}")
-        elif not isinstance(quantity, int):
+        if not isinstance(quantity, int):
             raise TypeError(f"Quantity has to be a whole number: {quantity}")
-        elif price < 0 or quantity < 0:
+        if price < 0 or quantity < 0:
             raise ValueError("Price/Quantity cannot be negative")
-        else:
-            self.name = name
-            self.price = float(price)
-            self._quantity = quantity
-            self._active = True
+        self.name = name
+        self.price = float(price)
+        self._quantity = quantity
+        self._active = True
 
 
     def get_quantity(self):
@@ -95,6 +94,5 @@ class Product:
             raise ValueError("Product Inactive")
         if (self.get_quantity() - quantity) < 0:
             raise ValueError("Quantity larger then what exists")
-        else:
-            self.set_quantity((self.get_quantity() - quantity))
-            return self.price * quantity
+        self.set_quantity((self.get_quantity() - quantity))
+        return self.price * quantity
