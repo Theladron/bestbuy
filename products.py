@@ -32,11 +32,8 @@ class Product:
             raise ValueError("Price/Quantity cannot be negative")
         self.name = name
         self.price = float(price)
-        self._quantity = quantity
-        if self._quantity > 0:
-            self._active = True
-        else:
-            self._active = False
+        self._active = True
+        self.set_quantity(quantity)
 
 
     def get_quantity(self):
